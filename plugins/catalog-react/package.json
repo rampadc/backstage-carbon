@@ -1,0 +1,49 @@
+{
+  "name": "@itz/backstage-plugin-catalog-react",
+  "description": "Web library for the catalog plugin",
+  "version": "0.1.0",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "license": "Apache-2.0",
+  "private": true,
+  "publishConfig": {
+    "access": "public",
+    "main": "dist/index.esm.js",
+    "types": "dist/index.d.ts"
+  },
+  "backstage": {
+    "role": "web-library"
+  },
+  "sideEffects": false,
+  "scripts": {
+    "start": "backstage-cli package start",
+    "build": "backstage-cli package build",
+    "lint": "backstage-cli package lint",
+    "test": "backstage-cli package test",
+    "clean": "backstage-cli package clean",
+    "prepack": "backstage-cli package prepack",
+    "postpack": "backstage-cli package postpack"
+  },
+  "dependencies": {
+    "@backstage/catalog-model": "^1.4.4",
+    "@backstage/core-plugin-api": "^1.9.0",
+    "@backstage/plugin-catalog-react": "^1.10.0",
+    "@carbon/ibm-products": "^2.30.0",
+    "@carbon/icons-react": "^11.37.0",
+    "@carbon/react": "^1.52.0",
+    "@material-ui/core": "^4.12.2",
+    "react-use": "^17.5.0"
+  },
+  "peerDependencies": {
+    "react": "^16.13.1 || ^17.0.0 || ^18.0.0"
+  },
+  "devDependencies": {
+    "@backstage/cli": "^0.25.2",
+    "@backstage/test-utils": "^1.5.0",
+    "@testing-library/jest-dom": "^6.0.0",
+    "@testing-library/react": "^14.0.0"
+  },
+  "files": [
+    "dist"
+  ]
+}
