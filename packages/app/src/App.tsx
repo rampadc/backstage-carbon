@@ -2,12 +2,13 @@ import React from 'react';
 import { Navigate, Route } from 'react-router-dom';
 import { apiDocsPlugin, ApiExplorerPage } from '@backstage/plugin-api-docs';
 import {
-  CatalogEntityPage,
+  // CatalogEntityPage,
   // CatalogIndexPage,
   catalogPlugin,
 } from '@backstage/plugin-catalog';
 import {
   CatalogIndexPage,
+  CatalogEntityPage,
 } from '@itz/backstage-plugin-catalog-react';
 import {
   CatalogImportPage,
@@ -106,7 +107,7 @@ export default app.createRoot(
     <AlertDisplay />
     <OAuthRequestDialog />
     <AppRouter>
-      <Theme theme='g100'>
+      <Theme theme='white'>
         <Root>{routes}</Root>
       </Theme>
     </AppRouter>

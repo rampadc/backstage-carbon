@@ -8,14 +8,22 @@ import {
   useRowIsMouseOver,
   useSelectRows,
 } from "@carbon/ibm-products";
-import { DatagridActions } from "./DatagridActions";
 import { catalogApiRef } from "@backstage/plugin-catalog-react";
 import { useApi } from "@backstage/core-plugin-api";
 import useAsync from 'react-use/lib/useAsync';
+import { DatagridActions } from "./DatagridActions";
+import { Link as CarbonLink } from "@carbon/react";
+import { Link, Navigate } from 'react-router-dom';
 
 const headers = [
-  { Header: 'Name', sticky: 'left', accessor: 'name', },
-  { Header: 'Owner', accessor: 'owner', },
+  { Header: 'Name', sticky: 'left', accessor: 'name', 
+    Cell: ({ cell: { value } }) => (
+      <CarbonLink as={Link} to={value.href}>{value.title}</CarbonLink>
+  )},
+  { Header: 'Owner', accessor: 'owner',
+    Cell: ({ cell: { value } }) => (
+      <CarbonLink as={Link} to={value.href}>{value.title}</CarbonLink>
+  )},
   { Header: 'Type', accessor: 'type', filter: 'checkbox'},
   { Header: 'Lifecycle', accessor: 'lifecycle', filter: 'dropdown', },
   { Header: 'Description', accessor: 'description', },
@@ -111,6 +119,11 @@ const filterProps = {
     const endDateObj = new Date(end);
     return `${startDateObj.toLocaleDateString()} - ${endDateObj.toLocaleDateString()}`;
   },
+  initialState: {
+    filters: [
+      {id: 'kind', type: 'checkbox', value: 'Component'}
+    ]
+  },
 };
 
 export const CatalogItemsTable = () => {
@@ -130,10 +143,21 @@ export const CatalogItemsTable = () => {
       //   'kind': 'Component',
       // }
     });
+
     const entities = response.items.flatMap(entity => {
+      const name = entity.metadata.name;
+      const namespace = entity.metadata.namespace || 'default';
+      const kind = entity.kind;
+
       return {
-        name: entity.metadata.name,
-        owner: entity.spec.owner,
+        name: {
+          title: entity.metadata.name,
+          href: `/catalog/${namespace}/${kind}/${name}`.toLowerCase()
+        },
+        owner: {
+          title: entity.spec.owner,
+          href: `/catalog/${namespace}/user/${name}`.toLowerCase()
+        },
         type: entity.spec?.type || '',
         lifecycle: entity.spec?.lifeycle || '',
         description: entity.spec.description || '',

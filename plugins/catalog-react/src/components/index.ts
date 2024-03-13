@@ -3,3 +3,4 @@
 // which components are public API and should be exported from the package.
 
 export * from './CatalogIndexPage';
+export * from './CatalogEntityPage';
