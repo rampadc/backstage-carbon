@@ -8,7 +8,7 @@ import {
   Content,
 } from '@carbon/react';
 
-import { Search, Notification, Switcher as SwitcherIcon, Catalog, IntentRequestCreate, Radar } from '@carbon/icons-react';
+import { Search, Catalog, IntentRequestCreate, Radar } from '@carbon/icons-react';
 
 
 export const Root = ({ children }: PropsWithChildren<{}>) => (
